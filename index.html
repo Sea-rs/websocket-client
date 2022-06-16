@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>websocket client</title>
+        <script src="main.js" async></script>
+    </head>
+    <body>
+        <main>
+            <div id="chat__body"></div>
+            <div class="btn__container">
+                <div class="btn" id="btn--submit">送信</div>
+                <div class="btn" id="btn--open">通信開始</div>
+                <!-- <div id="btn--close">通信終了</div> -->
+            </div>
+        </main>
+    </body>
+    <style>
+        #chat__body {
+            height: 300px;
+            width: auto;
+            padding: 0 30px;
+            background-color: rgb(219, 238, 253);
+        }
+
+        .btn__container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn {
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            margin-top: 24px;
+            border: 2px solid #2755bf;
+            border-radius: 15px;
+        }
+
+        .btn:not(.btn:last-of-type) {
+            margin-right: 20px;
+        }
+
+        .btn:hover {
+            background-color: rgb(238, 238, 238);
+        }
+    </style>
+</html>
