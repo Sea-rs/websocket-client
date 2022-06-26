@@ -237,6 +237,15 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         };
         let socket = new Socket(5001);
+        let test = false;
+
+        window.addEventListener('focus', () => {
+            test = true;
+        });
+
+        window.addEventListener('blur', () => {
+            test = false;
+        });
 
         socket.init();
         socket.messageEvent = function(msg) {
@@ -252,6 +261,12 @@ document.addEventListener('DOMContentLoaded', () => {
             reactionBody.appendChild(reaction);
 
             let animation = function() {
+                if (document.visibilityState === 'hidden') {
+                    reactionBody.removeChild(reaction);
+
+                    return;
+                }
+
                 if (moveY <= 400) {
                     moveY++;
 
