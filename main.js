@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let message = function (msgObj) {
                 if (that.messageEvent !== null && typeof that.messageEvent === 'function') {
-                    console.log(msgObj.data);
                     that.messageEvent(msgObj.data);
                 }
             }
@@ -77,9 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         displayOpenMessage(msg) {
+            this.timeoutTime = 0;
             this.doEnable();
-
-            console.log('疎通成功！');
         }
 
         displayCloseMessage(msg) {
@@ -135,10 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         displayMessage(msg) {
-            let timeHours = new Date().getHours().toString(10).padStart(2, '0');
-            let timeMinutes = new Date().getMinutes().toString(10).padStart(2, '0');
-            let timeSeconds = new Date().getSeconds().toString(10).padStart(2, '0');
-
             let messageElem = document.createElement('p');
             let text = document.createElement('span');
             let timeStamp = document.createElement('span');
@@ -148,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timeStamp.classList.add('chat__timestamp');
 
             text.innerText = msg;
-            timeStamp.innerText = timeHours + ':' + timeMinutes + ':' + timeSeconds;
+            timeStamp.innerText = getServerDate();
 
             messageElem.appendChild(text);
             messageElem.appendChild(timeStamp);
@@ -209,10 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     
         let enterSend = function (key) {
-            if (key.key === 'Enter' && key.ctrlKey) {
+            if (key.key === 'Enter' && !key.shiftKey) {
                 let message = socket.getSendMessage();
 
                 socket.sendMessage(message);
+
+                console.log(key.key);
+
+                key.preventDefault();
             }
         }
     
@@ -289,5 +287,15 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < reactionBtn.length; i++) {
             reactionBtn[i].addEventListener('click', reaction);
         }
+    }
+
+    function getServerDate() {
+        let date = new Date();
+    
+        let timeHours = date.getHours().toString(10).padStart(2, '0');
+        let timeMinutes = date.getMinutes().toString(10).padStart(2, '0');
+        let timeSeconds = date.getSeconds().toString(10).padStart(2, '0');
+    
+        return timeHours + ':' + timeMinutes + ':' + timeSeconds;
     }
 });
