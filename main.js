@@ -205,10 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let enterSend = function (key) {
             if (key.key === 'Enter' && !key.shiftKey) {
                 let message = socket.getSendMessage();
-
                 socket.sendMessage(message);
-
-                console.log(key.key);
 
                 key.preventDefault();
             }
