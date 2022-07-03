@@ -220,6 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function reaction() {
         let reactionBtn = document.getElementsByClassName('btn__reaction');
+        let toggleReactionBtn = document.getElementById('js-btn__toggle');
+        let reactionContainer = document.getElementById('btn__reaction__container');
         let reactionData = {
             'type1' : {
                 type: 'type1'
@@ -230,24 +232,43 @@ document.addEventListener('DOMContentLoaded', () => {
             'type3' : {
                 type: 'type3'
             },
+            'type4' : {
+                type: 'type4'
+            },
         };
         let socket = new Socket(5001);
-        let test = false;
+        let doEnableReaction = true;
 
-        window.addEventListener('focus', () => {
-            test = true;
-        });
+        toggleReactionBtn.addEventListener('click', () => {
+            // reactionスペースが隠されていたら表示させる
+            if (reactionContainer.classList.contains('btn__reaction__container--hidden')) {
+                reactionContainer.classList.remove('btn__reaction__container--hidden');
+                reactionContainer.classList.add('btn__reaction__container--display');
+                toggleReactionBtn.classList.remove('btn__toggle--open');
+                toggleReactionBtn.classList.add('btn__toggle--close');
 
-        window.addEventListener('blur', () => {
-            test = false;
+                doEnableReaction = true;
+            } else {
+                reactionContainer.classList.remove('btn__reaction__container--display');
+                reactionContainer.classList.add('btn__reaction__container--hidden');
+                toggleReactionBtn.classList.remove('btn__toggle--close');
+                toggleReactionBtn.classList.add('btn__toggle--open');
+
+                doEnableReaction = false;
+            }
         });
 
         socket.init();
         socket.messageEvent = function(msg) {
+            if (!doEnableReaction) {
+                return;
+            }
+
             let type = JSON.parse(msg)['type'];
             let reactionBody = document.querySelector('#reaction');
             let query = '[data-type="' + type +'"]'
-            let moveY = 0;
+            let moveY = 110;
+            let maxMoveY = moveY + 300;
 
             let reactionElem = reactionBody.querySelector(query);
             let reaction = reactionElem.cloneNode(true);
@@ -262,8 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                if (moveY <= 400) {
-                    moveY++;
+                if (moveY <= maxMoveY) {
+                    moveY += 2;
 
                     reaction.style.top ='-' + moveY + 'px'
 

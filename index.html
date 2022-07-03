@@ -3,222 +3,57 @@
     <head>
         <title>websocket client</title>
         <script src="main.js"></script>
+        <link rel="stylesheet" href="main.css">
         <meta name="viewport" content="width=device-width,initial-scale=1">
     </head>
     <body>
         <main>
-            <div id="chat__body">
-                <div id="chat__error">
-                    <p class="errorMessage font--xl">チャット機能は現在利用できません。</p>
-                    <p class="errorMessage">
-                        社内ネットワークに接続している場合のみ利用可能です。<br>
-                        接続後にページを更新してください。
-                    </p>
-                    <p class="errorMessage">
-                        接続しても利用できない場合は、サーバーが停止している可能性があります。<br>
-                        時間をおいてページを更新してください。
-                    </p>
+            <div id="main_content">
+                <div id="main_content__left">
+                    <div id="main_content__video">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/4XbK1uCjuz4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div id="reaction">
+                        <div id="btn__reaction__container">
+                            <button class="js-btn btn__reaction" type="button" name="type1" disabled></button>
+                            <button class="js-btn btn__reaction" type="button" name="type2" disabled></button>
+                            <button class="js-btn btn__reaction" type="button" name="type3" disabled></button>
+                            <button class="js-btn btn__reaction" type="button" name="type4" disabled></button>
+                        </div>
+                        <div id="reaction__body">
+                            <div class="reaction__item" data-type="type1"></div>
+                            <div class="reaction__item" data-type="type2"></div>
+                            <div class="reaction__item" data-type="type3"></div>
+                            <div class="reaction__item" data-type="type4"></div>
+                        </div>
+                        <button id="js-btn__toggle" class="js-btn btn__toggle btn__toggle--close" type="button" disabled></button>
+                    </div>
                 </div>
-                <div id="chat__receive"></div>
-                <textarea id="chat__input" rows="3" placeholder="メッセージを送って配信を盛り上げよう！" disabled></textarea>
-                <span class="annotation">※Shift + Enterで改行できます</span>
-                <span class="annotation">※Enterもしくは「送信」をクリックでメッセージを送信できます</span>
+                <div id="chat__body">
+                    <div id="chat__error">
+                        <p class="errorMessage font--xl">チャット機能は現在利用できません。</p>
+                        <p class="errorMessage">
+                            社内ネットワークに接続している場合のみ利用可能です。<br>
+                            接続後にページを更新してください。
+                        </p>
+                        <p class="errorMessage">
+                            接続しても利用できない場合は、サーバーが停止している可能性があります。<br>
+                            時間をおいてページを更新してください。
+                        </p>
+                    </div>
+                    <div id="chat__receive"></div>
+                    <textarea id="chat__input" rows="3" placeholder="メッセージを送って配信を盛り上げよう！" disabled></textarea>
+                    <div class="annotation__container">
+                        <span class="annotation">※Shift + Enterで改行できます</span>
+                        <span class="annotation">※Enterもしくは「送信」をクリックでメッセージを送信できます</span>
+                    </div>
+                </div>
             </div>
             <div class="btn__container">
                 <button class="js-btn btn" id="btn__submit" type="button" name="chat__input" disabled>送信</button>
-                <!-- <div id="btn--close">通信終了</div> -->
-            </div>
-            <div id="reaction">
-                <div id="btn__reaction__container">
-                    <button class="js-btn btn__reaction" type="button" name="type1" disabled>リアクション1</button>
-                    <button class="js-btn btn__reaction" type="button" name="type2" disabled>リアクション2</button>
-                    <button class="js-btn btn__reaction" type="button" name="type3" disabled>リアクション3</button>
-                </div>
-                <div id="reaction__body">
-                    <div class="reaction__item" data-type="type1">type1</div>
-                    <div class="reaction__item" data-type="type2">type2</div>
-                    <div class="reaction__item" data-type="type3">type3</div>
-                </div>
             </div>
         </main>
     </body>
     <style>
-        *:focus {
-            box-shadow: 0 0 0 2px #2755bf;
-        }
-
-        #chat__body {
-            display: flex;
-            flex-direction: column;
-            height: 300px;
-            width: auto;
-            padding: 6px 20px;
-            background-color: #e9f4fc;
-            position: relative;
-        }
-
-        #chat__receive {
-            height: 100%;
-            padding: 10px;
-            overflow-y: auto;
-        }
-
-        #chat__input {
-            outline: none;
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 4px;
-            padding: 6px 10px;
-            resize: none;
-        }
-
-        #chat__input::placeholder {
-            color: #a3c1c5;
-        }
-
-        @media screen and (max-width: 768px) {
-            #chat__input {
-                height: 60px;
-            }
-        }
-
-        #chat__error {
-            display: flex;
-            justify-content: center;
-            text-align: center;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-            opacity: 0.6;
-            background-color: #000;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        #reaction {
-            position: fixed;
-            right: 10px;
-            bottom: 10px;
-        }
-
-        #reaction__body {
-            width: 150px;
-            height: 150px;
-        }
-
-        #btn__reaction__container {
-            display: flex;
-            flex-wrap: wrap;
-            width: 150px;
-            height: 150px;
-            position: fixed;
-            right: 10px;
-            bottom: 10px;
-            z-index: 1;
-        }
-
-        #btn__reaction__container .btn:first-of-type {
-            margin-top: 0;
-        }
-
-        .errorMessage {
-            cursor: default;
-            color: #fff;
-        }
-
-        .chat__message {
-            display: flex;
-            margin-top: 0;
-            margin-bottom: 8px;
-        }
-
-        .chat__timestamp {
-            margin-left: auto;
-        }
-
-        .btn__container {
-            display: flex;
-            justify-content: center;
-        }
-
-        .btn {
-            cursor: pointer;
-            text-align: center;
-            width: 200px;
-            margin-top: 24px;
-            border: 2px solid #2755bf;
-            border-radius: 50px;
-            padding-top: 6px;
-            padding-bottom: 6px;
-            background-color: #fff;
-        }
-
-        .btn[disabled] {
-            cursor: default;
-            border-color: #cdcdcd;
-            background-color: #cdcdcd;
-        }
-
-        .btn:not([disabled]):hover {
-            background-color: #d3e2ec;
-        }
-
-        .btn:not(.btn:last-of-type) {
-            margin-right: 20px;
-        }
-
-        .btn__reaction {
-            border: none;
-        }
-
-        .js-btn {
-            width: 50%;
-            background-color: #fff;
-        }
-
-        .js-btn:not([disabled]):hover {
-            background-color: #d3e2ec;
-        }
-
-        .js-btn:not([disabled]):focus {
-            box-shadow: none;
-        }
-
-        .reaction__item {
-            position: absolute;
-        }
-
-        .shake {
-            animation: shake 1s ease-in-out infinite, opacity 2s linear forwards;
-        }
-
-        @keyframes shake {
-            0%, 100% {
-                right: 50px;
-            }
-
-            50% {
-                right: 0px;
-            }
-        }
-
-        @keyframes opacity {
-            0% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-            }
-        }
-
-        .annotation {
-            font-size: 14px;
-        }
-
-        .font--xl {
-            font-size: 26px;
-        }
     </style>
 </html>
