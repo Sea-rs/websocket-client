@@ -7,6 +7,9 @@ body {
 }
 
 main {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0 26px;
 }
 
@@ -19,6 +22,12 @@ main {
     margin-top: 66px;
 }
 
+@media screen and (max-width: 1080px) {
+    #main_content {
+        flex-direction: column;
+    }
+}
+
 #main_content__left {
     display: flex;
     flex-direction: column;
@@ -26,10 +35,22 @@ main {
     margin-right: 40px;
 }
 
+@media screen and (max-width: 1080px) {
+    #main_content__left {
+        margin-right: 0;
+    }
+}
+
 #main_content__video {
     height: 100%;
     max-height: 450px;
     margin-bottom: 18px;
+}
+
+@media screen and (max-width: 1080px) {
+    #main_content__video {
+        height: 50vw;
+    }
 }
 
 #main_content__video iframe {
@@ -49,6 +70,12 @@ main {
     position: relative;
 }
 
+@media screen and (max-width: 1080px) {
+    #chat__body {
+        width: 100%;
+    }
+}
+
 #chat__receive {
     height: 558px;
     margin-bottom: 16px;
@@ -56,6 +83,12 @@ main {
     padding-right: 10px;
     padding-left: 10px;
     overflow-y: scroll;
+}
+
+@media screen and (max-width: 1080px) {
+    #chat__receive {
+        height: 120px;
+    }
 }
 
 #chat__input::-webkit-scrollbar, #chat__receive::-webkit-scrollbar {
@@ -77,36 +110,49 @@ main {
     outline: none;
     font-size: 13px;
     font-weight: bold;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
     margin-left: 10px;
     margin-right: 10px;
     border: none;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 2px solid #aaa;
     padding-top: 6px;
     padding-bottom: 6px;
     resize: none;
 }
 
+@media screen and (max-width: 1080px) {
+    #chat__input {
+        font-size: 16px;
+    }
+}
+
 #chat__input::placeholder {
-    color: #a3c1c5;
+    color: #516e41;
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 1080px) {
+    #chat__input::placeholder {
+        font-size: 16px;
+    }
 }
 
 #chat__input:focus {
-    animation: shadow_bottom 0.1s linear forwards;
-    border-bottom-color: #444;
+    animation: border_color 0.1s linear forwards;
+    border-bottom-color: #888;
 }
 
-@keyframes shadow_bottom {
+@keyframes border_color {
     0% {
-        box-shadow: 0 #444;
+        border-color: #888;
     }
 
     100% {
-        box-shadow: 0px 2px 0 0px #444;
+        border-color: #222;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1080px) {
     #chat__input {
         height: 60px;
     }
@@ -129,6 +175,15 @@ main {
 #reaction {
     margin-left: auto;
     position: relative;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1080px) {
+    #reaction {
+        position: fixed;
+        right: 16px;
+        bottom: 12px;
+    }
 }
 
 #reaction__body {
@@ -147,6 +202,13 @@ main {
     height: 220px;
     width: 250px;
     z-index: 2;
+}
+
+@media screen and (max-width: 1080px) {
+    #btn__reaction__container {
+        height: 110px;
+        width: 125px;
+    }
 }
 
 #btn__reaction__container .btn:first-of-type {
@@ -181,6 +243,28 @@ main {
     }
 }
 
+@media screen and (max-width: 1080px) {
+    @keyframes reaction_container_hidden {
+        0% {
+            height: 110px;
+        }
+    
+        100% {
+            height: 0;
+        }
+    }
+
+    @keyframes reaction_container_display {
+        0% {
+            height: 0;
+        }
+    
+        100% {
+            height: 110px;
+        }
+    }
+}
+
 .errorMessage {
     cursor: default;
     color: #fff;
@@ -204,14 +288,21 @@ main {
 .btn__container {
     display: flex;
     justify-content: center;
+    margin-bottom: 12px;
+}
+
+@media screen and (max-width: 1080px) {
+    .btn__container {
+        margin-right: auto;
+        margin-left: 10px;
+    }
 }
 
 .btn {
     cursor: pointer;
     text-align: center;
     width: 200px;
-    margin-top: 24px;
-    border: 2px solid #2755bf;
+    border: 2px solid #7ba23f;
     border-radius: 50px;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -225,7 +316,7 @@ main {
 }
 
 .btn:not([disabled]):hover {
-    background-color: #d3e2ec;
+    background-color: #7ba23f;
 }
 
 .btn:not(.btn:last-of-type) {
@@ -234,6 +325,7 @@ main {
 
 .btn__reaction {
     width: 50%;
+    height: 50%;
     padding: 0;
     background-color: #fff;
 }
@@ -244,6 +336,10 @@ main {
 
 .btn__reaction:not([disabled]):focus {
     box-shadow: none;
+}
+
+.btn__reaction[disabled] {
+    opacity: 0.2;
 }
 
 .btn__reaction, .reaction__item {
@@ -280,10 +376,21 @@ main {
     align-items: center;
     border: none;
     border-radius: 50%;
+    padding: 0;
     top: -15px;
     right: -15px;
     background-color: #485859;
     position: absolute;
+}
+
+@media screen and (max-width: 1080px) {
+    .btn__toggle {
+        top: -20px;
+    }
+}
+
+.btn__toggle[disabled] {
+    opacity: 0.2;
 }
 
 .btn__toggle--close::before {
@@ -313,6 +420,13 @@ main {
     z-index: 1;
 }
 
+@media screen and (max-width: 1080px) {
+    .reaction__item {
+        width: 50px;
+        height: 50px;
+    }
+}
+
 .shake {
     animation: shake 1s ease-in-out infinite, opacity 2s linear forwards;
 }
@@ -338,7 +452,15 @@ main {
 }
 
 .annotation__container {
+    display: flex;
+    flex-direction: column;
     padding: 0 10px;
+}
+
+@media screen and (max-width: 1080px) {
+    .annotation__container {
+        display: none;
+    }
 }
 
 .annotation {

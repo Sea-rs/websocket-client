@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
             this.SOCKET_URL = 'ws://192.168.11.7:' + this.PORT;
             this.SOCKET = null;
 
+            this.IS_SMART_PHONE = false;
+
             this.isFailed = false;
             this.timeoutTime = 0;
             this.messageEvent = null;
@@ -55,6 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     that.messageEvent(msgObj.data);
                 }
             }
+
+            this.IS_SMART_PHONE = isSmartPhone();
 
             this.SOCKET.removeEventListener('error', error);
             this.SOCKET.addEventListener('error', error);
@@ -122,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         getSendMessage() {
             let message = this.CHAT_INPUT.value;
+            message = message.trim();
 
             if (message === '') {
                 return false;
@@ -270,6 +275,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let moveY = 110;
             let maxMoveY = moveY + 300;
 
+            if (isSmartPhone()) {
+                moveY = 50;
+            }
+
             let reactionElem = reactionBody.querySelector(query);
             let reaction = reactionElem.cloneNode(true);
 
@@ -315,5 +324,19 @@ document.addEventListener('DOMContentLoaded', () => {
         let timeSeconds = date.getSeconds().toString(10).padStart(2, '0');
     
         return timeHours + ':' + timeMinutes + ':' + timeSeconds;
+    }
+
+    function isSmartPhone() {
+        if (/(iPhone)/.test(navigator.userAgent)) {
+            return true;
+        } else {
+            let windowSize = window.outerWidth;
+
+            if (windowSize <= 1080) {
+                return true;
+            }
+        }
+
+        return false;
     }
 });
