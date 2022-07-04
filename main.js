@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let reactionElem = reactionBody.querySelector(query);
             let reaction = reactionElem.cloneNode(true);
 
-            reaction.classList.add('shake');
+            reaction.classList.add('flow_up_reaction');
             reactionBody.appendChild(reaction);
 
             let animation = function() {
