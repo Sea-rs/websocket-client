@@ -2,15 +2,31 @@
 <html>
     <head>
         <title>websocket client</title>
-        <script src="main.js"></script>
-        <link rel="stylesheet" href="main.css">
+        <script src="src/js/main.js"></script>
+        <link rel="stylesheet" href="src/main.css">
         <meta name="viewport" content="width=device-width,initial-scale=1">
     </head>
     <body>
+        <div id="loading"></div>
+        <header class="header">
+            <div class="header__logoContainer">
+                <div class="header__live">
+                    <!-- websocketで動的に取得 -->
+                    <p>LIVE</p>
+                    <div class="header__backContainer">
+                        <div class="header__backParts header__backTop"></div>
+                        <div class="header__backParts header__backBottom"></div>
+                    </div>
+                </div>
+                <div class="header__title">
+                    <p>CSSとJSでアニメーションを作成しよう ～#1 CSSのプロパティについて～</p>
+                </div>
+            </div>
+        </header>
         <main>
             <div id="main_content">
                 <div id="main_content__left">
-                    <div id="main_content__video">
+                    <div id="main_content__video" width="560" height="315">
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/4XbK1uCjuz4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <div id="reaction">
