@@ -12,7 +12,7 @@
 let isFirst = true;
 
 document.addEventListener('DOMContentLoaded', () => {
-    class Socket {
+    window.Socket = class Socket {
         constructor(PORT = 5000) {
             this.SUBMIT_BTN = document.getElementById('btn__submit');
             this.CHAT_INPUT = document.getElementById('chat__input');
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             let open = function () {
-                that.displayOpenMessage();
+                that.openEvent();
             }
 
             let close = function () {
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('%c接続に失敗しました', 'color: red;');
         }
 
-        displayOpenMessage(msg) {
+        openEvent(msg) {
             this.timeoutTime = 0;
             this.doEnable();
         }
@@ -146,11 +146,15 @@ document.addEventListener('DOMContentLoaded', () => {
             text.classList.add('text');
             timeStamp.classList.add('chat__timestamp');
 
-            text.innerText = msg;
+            text.innerText = msg.text;
             timeStamp.innerText = getServerDate();
 
             messageElem.appendChild(text);
             messageElem.appendChild(timeStamp);
+
+            if (msg.isAdmin) {
+                messageElem.classList.add('admin_message');
+            }
 
             this.CHAT_RECEIVE.appendChild(messageElem);
 
@@ -187,14 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loadChat();
-    reaction();
-
-    function loadChat() {
-        let socket = new Socket(5000);
+    window.loadChat = function loadChat() {
+        let socket = new window.Socket(5000);
     
         socket.init();
         socket.messageEvent = function(msg) {
+            msg = JSON.parse(msg);
+
             socket.receiveMessage(msg);
         }
 
@@ -204,13 +207,26 @@ document.addEventListener('DOMContentLoaded', () => {
         let clickSend = function () {
             let message = socket.getSendMessage();
 
-            socket.sendMessage(message);
+            if (!message) {
+                return;
+            }
+
+            message = {'text': message};
+
+            socket.sendMessage(JSON.stringify(message));
         }
     
         let enterSend = function (key) {
             if (key.key === 'Enter' && !key.shiftKey) {
                 let message = socket.getSendMessage();
-                socket.sendMessage(message);
+
+                if (!message) {
+                    return;
+                }
+
+                message = {'text': message}
+
+                socket.sendMessage(JSON.stringify(message));
 
                 key.preventDefault();
             }
@@ -223,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chatInput.addEventListener('keydown', enterSend);
     }
 
-    function reaction() {
+    window.reaction = function reaction(submitBtnClass, chatInputClass) {
         let reactionBtn = document.getElementsByClassName('btn__reaction');
         let toggleReactionBtn = document.getElementById('js-btn__toggle');
         let reactionContainer = document.getElementById('btn__reaction__container');
@@ -241,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 type: 'type4'
             },
         };
-        let socket = new Socket(5001);
+        let socket = new window.Socket(5001);
         let doEnableReaction = true;
 
         toggleReactionBtn.addEventListener('click', () => {
@@ -262,6 +278,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 doEnableReaction = false;
             }
         });
+
+        socket.SUBMIT_BTN = document.getElementById(submitBtnClass);
+        socket.CHAT_INPUT = document.getElementById(chatInputClass);
 
         socket.init();
         socket.messageEvent = function(msg) {

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html id="admin">
     <head>
-        <title>WebSocket Client</title>
-        <script src="src/js/main.js"></script>
-        <script src="src/js/client.js"></script>
-        <link rel="stylesheet" href="src/main.css">
+        <title>WebSocket Client Admin</title>
+        <script src="../src/js/main.js"></script>
+        <script src="../src/js/admin.js"></script>
+        <link rel="stylesheet" href="../src/main.css">
         <meta name="viewport" content="width=device-width,initial-scale=1">
     </head>
     <body>
@@ -61,15 +61,34 @@
                         </p>
                     </div>
                     <div id="chat__receive"></div>
-                    <textarea id="chat__input" rows="3" placeholder="メッセージを送って配信を盛り上げよう！" disabled></textarea>
+                    <textarea id="chat__input--admin" rows="3" placeholder="メッセージを送って配信を盛り上げよう！" disabled></textarea>
                     <div class="btn__container">
-                        <button class="js-btn btn" id="btn__submit" type="button" name="chat__input" disabled>送信</button>
+                        <button class="js-btn btn" id="btn__submit--admin" type="button" name="chat__input" disabled>送信</button>
                     </div>
                     <div class="annotation__container">
                         <span class="annotation">※Shift + Enterで改行できます</span>
                         <span class="annotation">※Enterもしくは「送信」をクリックでメッセージを送信できます</span>
                     </div>
                 </div>
+            </div>
+            <div id="admin_panel">
+                <body>
+                    <div>
+                        <p>告知部分</p>
+                        <input type="text">
+                        <input type="button" value="反映">
+                    </div>
+                    <div>
+                        <p>メッセージ部分</p>
+                        <input type="text">
+                        <input type="button" value="反映">
+                    </div>
+                    <div>
+                        <p>動画概要欄</p>
+                        <textarea id="video_description" rows="3"></textarea>
+                        <input type="button" value="反映" name="video_description">
+                    </div>
+                </body>
             </div>
         </main>
     </body>
