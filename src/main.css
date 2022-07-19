@@ -35,6 +35,12 @@ header {
     z-index: 3;
 }
 
+@media screen and (max-width: 1080px) {
+    header {
+        height: 44px;
+    }
+}
+
 body {
     margin: 0;
     position: relative;
@@ -44,6 +50,7 @@ main {
     max-width: var(--max-width);
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 16px;
     padding: 0 26px;
     opacity: 0;
     animation: show_main 0.5s 2s linear forwards;
@@ -97,7 +104,14 @@ main {
     position: fixed;
 }
 
+@media screen and (max-width: 1080px) {
+    .header__logoContainer {
+        height: 44px;
+    }
+}
+
 .header__live {
+    flex-shrink: 0;
     height: 100%;
     position: relative;
     padding: 0 40px;
@@ -109,14 +123,23 @@ main {
     font-size: 46px;
     display: flex;
     align-items: center;
-    flex-grow: 1;
     height: 100%;
     margin: 0;
     animation: path_circle 0.5s 1s ease-in forwards;
     clip-path: circle(0 at 0 0);
     position: relative;
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     z-index: 1;
+}
+
+@media screen and (max-width: 1080px) {
+    .header__live {
+        padding: 0 20px;
+    }
+
+    .header__live p {
+        font-size: 24px;
+    }
 }
 
 @keyframes path_circle {
@@ -185,6 +208,12 @@ main {
     background-color: #fff;
 }
 
+@media screen and (max-width: 1080px) {
+    .header__title {
+        padding: 0 12px;
+    }
+}
+
 @keyframes header__title {
     0% {
         clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
@@ -200,46 +229,66 @@ main {
     font-size: 28px;
     margin: 0;
     white-space: nowrap;
+    margin-left: calc(100% + 48px);
+    transform: translateX(0%);
     opacity: 0;
-    animation: header__title_opacity 0.5s 1.8s linear forwards, marquee_animation 20s linear infinite;
+    animation: marquee_animation 15s linear infinite;
+    animation-delay: 0s;
 }
 
-@keyframes header__title_opacity {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
+@media screen and (max-width: 1080px) {
+    .header__title p {
+        font-size: 24px;
     }
 }
 
 @keyframes marquee_animation {
-    0% {
-        margin-left: calc(100% + (24px));
+    /*
+        safariの仕様で0%にするとアニメーションがちらつく
+        10%にすることで要素の位置をリセットする際のちらつきをなくす
+
+        margin-leftとtranslateXで48px設けているのは、
+        マイナス位置まで動かすことで、自然なアニメーションにしているため
+        数字はPCの両端paddingの合計値を利用している
+    */
+    10% {
+        margin-left: calc(100% + 48px);
+        transform: translateX(0%);
+        opacity: 1;
     }
 
-    30% {
+    /*
+        20%から60%の値を同じにすることで、
+        テキストをいったん止めて読ませる効果を出している
+    */
+    20% {
         margin-left: 0;
+        transform: translateX(0%);
+        opacity: 1;
     }
 
-    70% {
-        transform: translateX(0);
+    60% {
+        margin-left: 0;
+        transform: translateX(0%);
+        opacity: 1;
     }
 
     100% {
-        transform: translateX(calc(-100% - 24px));
+        margin-left: 0;
+        transform: translateX(calc(-100% - 48px));
+        opacity: 1;
     }
 }
 
 #main_content {
     display: flex;
-    margin-top: 66px;
+    margin-top: 26px;
 }
 
 @media screen and (max-width: 1080px) {
     #main_content {
         flex-direction: column;
+        margin-top: 26px;
     }
 }
 
@@ -260,7 +309,6 @@ main {
     width: 100%;
     height: 100%;
     max-height: 450px;
-    margin-bottom: 18px;
     border-radius: 6px;
     background-color: var(--primary-dark-green);
 }
@@ -268,6 +316,7 @@ main {
 @media screen and (max-width: 1080px) {
     #main_content__video {
         height: 50vw;
+        margin-bottom: 18px;
     }
 }
 
@@ -279,9 +328,19 @@ main {
 
 #main_content__description {
     color: #fff;
-    flex-grow: 1;
+    flex-grow: 0;
+    width: calc(100% - 250px);
     height: 220px;
-    margin-right: 40px;
+    padding-right: 40px;
+}
+
+@media screen and (max-width: 1080px) {
+    #main_content__description {
+        font-size: 14px;
+        width: 100%;
+        height: 110px;
+        padding-right: 0;
+    }
 }
 
 #chat__body {
@@ -345,6 +404,7 @@ main {
     margin-right: 10px;
     border: none;
     border-bottom: 2px solid #aaa;
+    border-radius: 0;
     padding-top: 6px;
     padding-bottom: 6px;
     resize: none;
@@ -398,6 +458,8 @@ main {
     width: 100%;
     height: 100%;
     opacity: 0.6;
+    padding-left: 16px;
+    padding-right: 16px;
     background-color: #000;
     position: absolute;
     left: 0;
@@ -426,6 +488,13 @@ main {
     top: 0;
     left: 0;
     z-index: -1;
+}
+
+@media screen and (max-width: 1080px) {
+    #reaction__body {
+        height: 110px;
+        width: 125px;
+    }
 }
 
 #btn__reaction__container {
@@ -500,6 +569,14 @@ main {
 .errorMessage {
     cursor: default;
     color: #fff;
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+@media screen and (max-width: 1080px) {
+    .errorMessage {
+        font-size: 14px;
+    }
 }
 
 .chat__message {
@@ -682,16 +759,29 @@ main {
 }
 
 .flow_up_reaction {
-    animation: shake 1s ease-in-out infinite, opacity 2s linear forwards, pop 0.3s linear forwards;
+    right: 25px;
+    transition: opacity 1s;
+    opacity: 1;
+    animation: pop 0.3s 0.01s linear forwards, shake 1s 0s ease-in-out infinite;
 }
 
 @keyframes shake {
-    0%, 100% {
+    0% {
         right: 25px;
     }
 
     50% {
         right: -25px;
+    }
+}
+
+@keyframes opacity {
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
     }
 }
 
@@ -706,16 +796,6 @@ main {
 
     40% {
         transform: scale(1);
-    }
-}
-
-@keyframes opacity {
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
     }
 }
 
@@ -737,4 +817,10 @@ main {
 
 .font--xl {
     font-size: 26px;
+}
+
+@media screen and (max-width: 1080px) {
+    .font--xl {
+        font-size: 22px;
+    }
 }

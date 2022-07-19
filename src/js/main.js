@@ -312,13 +312,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (moveY <= maxMoveY) {
+                    // 移動量が200px超えたら、リアクション要素を透明にする
+                    if (moveY === 200) {
+                        reaction.style.opacity = 0;
+                    }
+
                     moveY += 2;
 
                     reaction.style.top ='-' + moveY + 'px'
 
                     requestAnimationFrame(animation);
                 } else {
-                    reactionBody.removeChild(reaction);
+                    // reactionBody.removeChild(reaction);
                 }
             }
 
