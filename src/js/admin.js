@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    auth();
+
     window.reaction('btn__submit--admin', 'chat__input--admin');
 
     admin();
@@ -52,4 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         chatInput.removeEventListener('keydown', enterSend);
         chatInput.addEventListener('keydown', enterSend);
     }
+
+    function auth() {}
 });
