@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    auth();
-
     window.reaction('btn__submit--admin', 'chat__input--admin');
 
     admin();
+    info();
 
     function admin() {
         let socket = new window.Socket(5000);
@@ -55,5 +54,33 @@ document.addEventListener('DOMContentLoaded', () => {
         chatInput.addEventListener('keydown', enterSend);
     }
 
-    function auth() {}
+    function info() {
+        let socket = new window.Socket(5002);
+
+        socket.SUBMIT_BTN = document.getElementById('btn__submit--admin');
+        socket.CHAT_INPUT = document.getElementById('chat__input--admin');
+
+        socket.init();
+        socket.messageEvent = function(msg) {
+            console.log(JSON.parse(msg));
+        }
+
+        let sendInfo = function() {
+            let notice = document.getElementById('notice_panel').querySelector('input').value;
+            let message = document.getElementById('message_panel').querySelector('input').value;
+            let description = document.getElementById('description_panel').querySelector('textarea').value;
+
+            let sendObj = {
+                'notice': notice,
+                'message': message,
+                'description': description
+            }
+
+            socket.sendMessage(JSON.stringify(sendObj));
+        }
+
+        let submitInfoBtn = document.getElementById('info_submit');
+
+        submitInfoBtn.addEventListener('click', sendInfo);
+    }
 });

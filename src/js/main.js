@@ -1,8 +1,6 @@
 /**
  * TODO
  * No.1 SPなど対応させる
- * 
- * No.x チャットのログを残す
  */
 
 /**
@@ -279,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // エラーが発生した際に送信ボタンと入力ボタンを無効化するために指定する
         socket.SUBMIT_BTN = document.getElementById(submitBtnClass);
         socket.CHAT_INPUT = document.getElementById(chatInputClass);
 
@@ -317,13 +316,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         reaction.style.opacity = 0;
                     }
 
-                    moveY += 2;
+                    moveY += 1;
 
                     reaction.style.top ='-' + moveY + 'px'
 
                     requestAnimationFrame(animation);
                 } else {
-                    // reactionBody.removeChild(reaction);
+                    reactionBody.removeChild(reaction);
                 }
             }
 

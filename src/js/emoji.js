@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
     let jsonURL = './src/json/emoji.json';
 
-    fetch(jsonURL).then(resonse => {
-        return resonse.json();
+    fetch(jsonURL).then(response => {
+        return response.json();
     }).then((response) => {
         let emojiContainer = document.querySelector('.emoji_container');
         let fragment = document.createDocumentFragment();

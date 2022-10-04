@@ -10,31 +10,34 @@
     </head>
     <body>
         <div id="loading"></div>
-        <header class="header">
-            <div class="header__logoContainer">
-                <div class="header__live">
-                    <!-- websocketで動的に取得 -->
-                    <p>準備中</p>
-                    <div class="header__backContainer">
-                        <div class="header__backParts header__backTop"></div>
-                        <div class="header__backParts header__backBottom"></div>
+        <main id="main_content">
+            <div id="main_content__left">
+                <header class="header">
+                    <div class="header__logoContainer">
+                        <div class="header__live">
+                            <!-- websocketで動的に取得 -->
+                            <p>準備中</p>
+                        </div>
+                        <!-- websocketで動的に取得 -->
+                        <div class="header__title">
+                            <p>CSSとJSでアニメーションを作成しよう ～#1 CSSのプロパティについて～</p>
+                        </div>
                     </div>
+                </header>
+                <div id="main_content__video" width="560" height="315">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/4XbK1uCjuz4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <!-- websocketで動的に取得 -->
-                <div class="header__title">
-                    <p>CSSとJSでアニメーションを作成しよう ～#1 CSSのプロパティについて～</p>
+                <div id="main_content__description">
+                    ここで動画の概要を入れる。
                 </div>
-            </div>
-        </header>
-        <main>
-            <div id="main_content">
-                <div id="main_content__left">
-                    <div id="main_content__video" width="560" height="315">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/4XbK1uCjuz4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <div id="main_content__description">
-                        ここで動画の概要を入れる。<br>
-                        動的にここを変更させたいけど、どうしましょう？私はいいと思います。
+                <div id="main_content__info">
+                    <div id="main_content__about">
+                        <h2>クロセンとは？</h2>
+                        <p>ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。</p>
+                        <p>
+                            ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。
+                            ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。
+                        </p>
                     </div>
                     <div id="reaction">
                         <div id="btn__reaction__container">
@@ -52,28 +55,28 @@
                         <button id="js-btn__toggle" class="js-btn btn__toggle btn__toggle--close" type="button" disabled></button>
                     </div>
                 </div>
-                <div id="chat__body">
-                    <div id="chat__error">
-                        <p class="errorMessage font--xl">チャット機能は現在利用できません。</p>
-                        <p class="errorMessage">
-                            社内ネットワークに接続している場合のみ利用可能です。<br>
-                            接続後にページを更新してください。
-                        </p>
-                        <p class="errorMessage">
-                            接続しても利用できない場合は、サーバーが停止している可能性があります。<br>
-                            時間をおいてページを更新してください。
-                        </p>
-                    </div>
-                    <div id="chat__receive"></div>
-                    <div class="emoji_container"></div>
-                    <textarea id="chat__input" rows="3" placeholder="メッセージを送って配信を盛り上げよう！" disabled></textarea>
-                    <div class="btn__container">
-                        <button class="js-btn btn" id="btn__submit" type="button" name="chat__input" disabled>送信</button>
-                    </div>
-                    <div class="annotation__container">
-                        <span class="annotation">※Shift + Enterで改行できます</span>
-                        <span class="annotation">※Enterもしくは「送信」をクリックでメッセージを送信できます</span>
-                    </div>
+            </div>
+            <div id="chat__body">
+                <div id="chat__error">
+                    <p class="errorMessage font--xl">チャット機能は現在利用できません。</p>
+                    <p class="errorMessage">
+                        社内ネットワークに接続している場合のみ利用可能です。<br>
+                        接続後にページを更新してください。
+                    </p>
+                    <p class="errorMessage">
+                        接続しても利用できない場合は、サーバーが停止している可能性があります。<br>
+                        時間をおいてページを更新してください。
+                    </p>
+                </div>
+                <div id="chat__receive"></div>
+                <div class="emoji_container"></div>
+                <textarea id="chat__input" rows="2" placeholder="メッセージを送って配信を盛り上げよう！" disabled></textarea>
+                <div class="btn__container">
+                    <button class="js-btn btn" id="btn__submit" type="button" name="chat__input" disabled>送信</button>
+                </div>
+                <div class="annotation__container">
+                    <span class="annotation">Shift + Enterで改行できます</span>
+                    <span class="annotation">Enterもしくは「送信」をクリックでメッセージを送信できます</span>
                 </div>
             </div>
         </main>
