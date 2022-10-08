@@ -62,17 +62,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         socket.init();
         socket.messageEvent = function(msg) {
-            console.log(JSON.parse(msg));
+            let msgJson = JSON.parse(msg);
+
+            let headerTitle = msgJson.headerTitle;
+            let videoName = msgJson.videoName;
+            let description = msgJson.description;
+
+            document.querySelector('.header__title').textContent = headerTitle;
+            document.querySelector('#main_content__description').textContent = videoName;
+            document.querySelector('#main_content__about').innerHTML = description;
         }
 
         let sendInfo = function() {
-            let notice = document.getElementById('notice_panel').querySelector('input').value;
-            let message = document.getElementById('message_panel').querySelector('input').value;
+            let headerTitle = document.getElementById('header_panel').querySelector('input').value;
+            let videoName = document.getElementById('video_name_panel').querySelector('input').value;
             let description = document.getElementById('description_panel').querySelector('textarea').value;
 
             let sendObj = {
-                'notice': notice,
-                'message': message,
+                'headerTitle': headerTitle,
+                'videoName': videoName,
                 'description': description
             }
 

@@ -26,10 +26,12 @@
                 <div id="main_content__video" width="560" height="315">
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/4XbK1uCjuz4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                <!-- websocketで動的に取得 -->
                 <div id="main_content__description">
                     ここで動画の概要を入れる。
                 </div>
                 <div id="main_content__info">
+                    <!-- websocketで動的に取得 -->
                     <div id="main_content__about">
                         <h2>クロセンとは？</h2>
                         <p>ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。ほげほげ。</p>
@@ -78,16 +80,20 @@
                 </div>
             </div>
             <div id="admin_panel">
-                <div id="notice_panel">
-                    <p>告知部分</p>
+                <div id="header_panel">
+                    <p>ヘッダー部分</p>
                     <input type="text">
                 </div>
-                <div id="message_panel">
-                    <p>メッセージ部分</p>
+                <div id="video_name_panel">
+                    <p>動画名</p>
                     <input type="text">
                 </div>
                 <div id="description_panel">
                     <p>動画概要欄</p>
+                    <p>
+                        ※注意：HTML属性が使えます。<br>
+                        不正なJSスクリプトは記述しないでください。
+                    </p>
                     <textarea rows="3"></textarea>
                 </div>
                 <input id="info_submit" type="button" value="すべて反映" name="info">

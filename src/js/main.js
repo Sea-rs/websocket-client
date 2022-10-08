@@ -339,6 +339,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    window.info = function info() {
+        let socket = new window.Socket(5002);
+
+        socket.SUBMIT_BTN = document.getElementById('btn__submit');
+        socket.CHAT_INPUT = document.getElementById('chat__input');
+
+        socket.init();
+        socket.messageEvent = function(msg) {
+            let msgJson = JSON.parse(msg);
+
+            let headerTitle = msgJson.headerTitle;
+            let videoName = msgJson.videoName;
+            let description = msgJson.description;
+
+            document.querySelector('.header__title').textContent = headerTitle;
+            document.querySelector('#main_content__description').textContent = videoName;
+            document.querySelector('#main_content__about').innerHTML = description;
+        }
+    }
+
     function getServerDate() {
         let date = new Date();
     
