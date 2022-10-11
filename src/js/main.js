@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let videoName = msgJson.videoName;
             let description = msgJson.description;
 
-            document.querySelector('.header__title').textContent = headerTitle;
+            document.querySelector('.header__title p').textContent = headerTitle;
             document.querySelector('#main_content__description').textContent = videoName;
             document.querySelector('#main_content__about').innerHTML = description;
         }

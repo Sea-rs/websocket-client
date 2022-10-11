@@ -1,3 +1,8 @@
+/*
+~ 1081 = PC
+1080 ~ 900 = tablet
+*/
+
 :root {
     --primary-yellow: #D19826;
     --primary-light-green: #7ba23f;
@@ -43,6 +48,9 @@
 
 html {
     font-family: 'Noto Sans JP', sans-serif;
+}
+
+html, body {
     height: 100%;
     background-color: var(--primary-dark-green);
     background-image: repeating-linear-gradient(-45deg, var(--primary-deep-green), var(--primary-deep-green) 14px, rgba(255,255,255,0) 0, rgba(255,255,255,0) 26px);
@@ -80,43 +88,71 @@ html, body, p, h2 {
 
 #main_content {
     display: flex;
-    margin-top: 24px;
+    height: 100%;
+    padding-top: 24px;
+}
+
+@media screen and (max-width: 900px) {
+    #main_content {
+        flex-direction: column;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
 }
 
 #main_content__left {
     flex-grow: 1;
     width: 560px;
     margin-left: 24px;
-    margin-right: 12px;
+    margin-right: 24px;
+}
+
+@media screen and (max-width: 900px) {
+    #main_content__left {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 24px;
+        margin-left: 0;
+    }
 }
 
 #chat__body {
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     width: 400px;
     margin-right: 24px;
-    padding: 18px 14px;
+    margin-bottom: 10px;
+    padding: 14px 10px;
     border-radius: 12px;
     box-shadow: 10px 10px 0px 0px var(--primary-yellow);
     background-color: #fff;
 }
 
+@media screen and (max-width: 900px) {
+    #chat__body {
+        width: 100%;
+    }
+}
+
 #chat__receive {
-    height: 370px;
+    height: 100%;
     margin-bottom: 16px;
     padding-top: 10px;
     padding-right: 10px;
-    padding-left: 10px;
     overflow-y: scroll;
 }
 
 .chat__message {
     display: flex;
-    font-size: 13px;
+    font-size: 14px;
     margin-top: 0;
     margin-bottom: 8px;
 }
 
 .chat__message .text {
+    word-break: break-all;
+    line-height: 1.2;
     margin-right: 20px;
 }
 
@@ -149,7 +185,7 @@ html, body, p, h2 {
 #chat__input, #chat__input--admin {
     outline: none;
     width: 100%;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: bold;
     border: none;
     border-bottom: 3px solid var(--primary-light-green);
@@ -160,8 +196,12 @@ html, body, p, h2 {
     resize: none;
 }
 
+#chat__input::placeholder, #chat__input--admin::placeholder {
+    color: var(--primary-light-green);
+}
+
 .header {
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 }
 
 .header__logoContainer {
@@ -172,22 +212,27 @@ html, body, p, h2 {
 
 .header__live {
     text-align: center;
+    flex-shrink: 0;
     color: #fff;
-    width: 100px;
     border-radius: 15px;
     margin-right: 24px;
-    padding: 6px 8px;
+    padding: 4px 14px;
     background-color: var(--primary-yellow);
+}
+
+.header__live p {
+    font-size: 28px;
 }
 
 .header__title {
     display: flex;
+    flex-grow: 1;
     overflow-x: hidden;
 }
 
 .header__title p {
     font-family: 'TsunagiGothic';
-    font-size: 20px;
+    font-size: 24px;
     margin: 0;
     white-space: nowrap;
     margin-left: calc(100%);
@@ -231,23 +276,38 @@ html, body, p, h2 {
     }
 }
 
-#main_content__video iframe {
-    width: 100%;
-    height: 315px;
-    border-radius: 10px;
-}
-
 #main_content__video {
-    height: 315px;
+    height: 340px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: var(--primary-yellow);
 }
 
+@media screen and (max-width: 900px) {
+    #main_content__video {
+        height: 60vw;
+        max-height: 400px;
+    }
+}
+
+#main_content__video iframe {
+    width: 100%;
+    height: 340px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 900px) {
+    #main_content__video iframe {
+        height: 60vw;
+        max-height: 400px;
+    }
+}
+
 #main_content__description {
     color: #fff;
-    padding: 5px;
-    margin-bottom: 24px;
+    font-size: 18px;
+    padding: 8px 14px;
+    margin-bottom: 30px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: var(--primary-yellow);
@@ -265,11 +325,27 @@ html, body, p, h2 {
 }
 
 #main_content__about h2 {
-    font-size: 20px;
+    font-size: 24px;
 }
 
 #main_content__about p {
     font-size: 14px;
+}
+
+#chat__error {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 #reaction {
@@ -282,7 +358,9 @@ html, body, p, h2 {
 
 @media screen and (max-width: 1080px) {
     #reaction {
+        right: 12px;
         position: fixed;
+        bottom: 10px;
     }
 }
 
@@ -306,8 +384,8 @@ html, body, p, h2 {
 #btn__reaction__container {
     display: flex;
     flex-wrap: wrap;
-    height: 220px;
-    width: 250px;
+    height: 240px;
+    width: 240px;
     border-radius: 14px;
     padding: 8px;
     background-color: #fff;
@@ -317,8 +395,8 @@ html, body, p, h2 {
 
 @media screen and (max-width: 1080px) {
     #btn__reaction__container {
-        height: 110px;
-        width: 125px;
+        height: 180px;
+        width: 180px;
     }
 }
 
@@ -336,7 +414,7 @@ html, body, p, h2 {
 
 @keyframes reaction_container_hidden {
     0% {
-        height: 220px;
+        height: 240px;
     }
 
     100% {
@@ -350,14 +428,14 @@ html, body, p, h2 {
     }
 
     100% {
-        height: 220px;
+        height: 240px;
     }
 }
 
 @media screen and (max-width: 1080px) {
     @keyframes reaction_container_hidden {
         0% {
-            height: 110px;
+            height: 180px;
         }
     
         100% {
@@ -371,7 +449,7 @@ html, body, p, h2 {
         }
     
         100% {
-            height: 110px;
+            height: 180px;
         }
     }
 }
@@ -428,6 +506,7 @@ html, body, p, h2 {
     color: var(--primary-light-green);
     text-align: center;
     width: 100%;
+    height: 40px;
     border: 2px solid var(--primary-light-green);
     border-radius: 50px;
     padding-top: 6px;
@@ -506,8 +585,8 @@ html, body, p, h2 {
 }
 
 .btn__toggle {
-    width: 30px;
-    height: 30px;
+    width: 52px;
+    height: 52px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -522,7 +601,9 @@ html, body, p, h2 {
 
 @media screen and (max-width: 1080px) {
     .btn__toggle {
-        top: -20px;
+        width: 40px;
+        height: 40px;
+        top: -10px;
     }
 }
 
@@ -533,7 +614,7 @@ html, body, p, h2 {
 .btn__toggle--close::before {
     content: '';
     display: inline-block;
-    width: 14px;
+    width: 25px;
     height: 4px;
     background-color: #fff;
 }
@@ -569,13 +650,13 @@ html, body, p, h2 {
 .emoji_container {
     margin-bottom: 12px;
     border-radius: 6px;
-    padding: 6px;
+    padding: 10px;
     background-color: var(--gray);
 }
 
 .emoji_container span {
     cursor: pointer;
-    width: 26px;
+    font-size: 20px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
